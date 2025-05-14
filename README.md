@@ -1,6 +1,6 @@
 # ![alt text](image.png)HiveMind
 
-HiveMind is a simulator for a fleet of edge devices that communicate via peer-to-peer, that gather local data, detect anomalies, and gossip insights across a mesh network — no central server required.
+HiveMind is a simulator for a fleet of edge devices that communicate via peer-to-peer, gathering local data, detecting anomalies, and gossiping insights across a mesh network — no central server required.
 
 ---
 
@@ -17,7 +17,7 @@ HiveMind is a simulator for a fleet of edge devices that communicate via peer-to
 ## 🚀 Technologies
 
 - **Rust**: Node agent, gossip protocol, local computation
-- **Go**: Dashboard API server, metrics aggregator
+- **Go**: API server, metrics aggregator
 - **libp2p**
 - Protobuf for messages
 
@@ -30,7 +30,7 @@ HiveMind is a simulator for a fleet of edge devices that communicate via peer-to
 | `edge_node`              | Simulated node: collects data, gossips, detects  |
 | `gossip_layer`           | Peer-to-peer message distribution system         |
 | `aggregator`             | Tracks average, stddev, and anomalies locally    |
-| `dashboard`              | Web-based real-time view of network state        |
+| `dashboard`              | Real-time view of network state                  |
 | `topology_simulator`     | Adds/removes nodes, simulates failure & latency  |
 
 ---
