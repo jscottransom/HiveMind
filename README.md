@@ -9,7 +9,7 @@ HiveMind is a simulator for a fleet of edge devices that communicate via peer-to
 - Virtual edge nodes that simulate sensor or status data
 - Lightweight gossip protocol for decentralized communication
 - Local aggregation and anomaly detection at the edge
-- Visual dashboard for health, alerts, and node state
+- Metrics retrieval for health, alerts, and node state
 - Supports dynamic topology, partitions, and node churn
 
 ---
