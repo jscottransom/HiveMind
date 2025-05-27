@@ -1,9 +1,9 @@
 use std::{error::Error, time::Duration};
 
 use futures::prelude::*;
-use libp2p::{noise, ping, swarm::SwarmEvent, tcp, yamux, Multiaddr};
-use tracing_subscriber::EnvFilter;
 use libp2p::SwarmBuilder;
+use libp2p::{Multiaddr, noise, ping, swarm::SwarmEvent, tcp, yamux};
+use tracing_subscriber::EnvFilter;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {

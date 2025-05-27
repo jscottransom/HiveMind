@@ -1356,6 +1356,7 @@ version = "0.1.0"
 dependencies = [
  "futures",
  "libp2p",
+ "rand 0.9.1",
  "tokio",
  "tracing-subscriber",
 ]
