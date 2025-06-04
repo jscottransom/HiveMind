@@ -1,3 +1,5 @@
+// Coordinates sharing messages between nodes
+
 use std::{error::Error, time::Duration};
 
 use futures::prelude::*;
@@ -6,7 +8,7 @@ use libp2p::{Multiaddr, noise, ping, swarm::SwarmEvent, tcp, yamux};
 use tracing_subscriber::EnvFilter;
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn Error>> {
+async fn gossip() -> Result<(), Box<dyn Error>> {
     let _ = tracing_subscriber::fmt()
         .with_env_filter(EnvFilter::from_default_env())
         .try_init();
@@ -42,3 +44,4 @@ async fn main() -> Result<(), Box<dyn Error>> {
         }
     }
 }
+
