@@ -4,7 +4,7 @@ HiveMind is a simulator for a fleet of edge devices that communicate via peer-to
 
 ---
 
-## 🧩 Features
+## Features
 
 - Virtual edge nodes that simulate sensor or status data
 - Lightweight gossip protocol for decentralized communication
@@ -14,7 +14,7 @@ HiveMind is a simulator for a fleet of edge devices that communicate via peer-to
 
 ---
 
-## 🚀 Technologies
+## Technologies
 
 - **Rust**: Node agent, gossip protocol, local computation
 - **Go**: API server, metrics aggregator
@@ -23,7 +23,7 @@ HiveMind is a simulator for a fleet of edge devices that communicate via peer-to
 
 ---
 
-## 🛠 Components
+## Components
 
 | Component                 | Description                                      |
 |--------------------------|--------------------------------------------------|
@@ -35,7 +35,7 @@ HiveMind is a simulator for a fleet of edge devices that communicate via peer-to
 
 ---
 
-## 📈 Use Case Ideas
+## Use Case Ideas
 
 - Container or warehouse health data
 - Energy microgrid availability
@@ -44,7 +44,7 @@ HiveMind is a simulator for a fleet of edge devices that communicate via peer-to
 
 ---
 
-## 📦 Setup
+## Setup
 
 ```bash
 # Run multiple simulated nodes
