@@ -97,15 +97,15 @@ async fn main() -> Result<(), Box<dyn Error>> {
     // Listening and dialing dependent on setup as bootstrap node or follower
     if let Some(addr) = args().nth(1) {
         swarm.listen_on("/ip4/0.0.0.0/tcp/9000".parse()?)?;
-        swarm.listen_on("/ip4/0.0.0.0/udp/9001/quick-v1".parse()?)?;
+        swarm.listen_on("/ip4/0.0.0.0/udp/9001/quic-v1".parse()?)?;
         
         let remote: Multiaddr = addr.parse()?;
         swarm.dial(remote)?;
-        info!("Dialed to: {addr}");
+        info!("Dialed address: {addr}");
     } else {
         info!("Act as bootstrap node");
         swarm.listen_on("/ip4/0.0.0.0/tcp/9000".parse()?)?;
-        swarm.listen_on("/ip4/0.0.0.0/udp/9001/quick-v1".parse()?)?;
+        swarm.listen_on("/ip4/0.0.0.0/udp/9001/quic-v1".parse()?)?;
     } 
 
     loop {
