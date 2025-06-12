@@ -1,12 +1,10 @@
 // Coordinates sharing messages between nodes
 
-use std::{error::Error, time::Duration};
 use std::env::args;
+use std::{error::Error, time::Duration};
 
-use futures::future::select;
-use futures::prelude::*;
-use log::{info, error, warn};
 use libp2p::{SwarmBuilder, kad};
+use log::{error, info, warn};
 use tracing_subscriber::EnvFilter;
 
 use futures::stream::StreamExt;
@@ -22,6 +20,11 @@ use libp2p::{
 use libp2p::identify::{
     Behaviour as IdentifyBehavior, Config as IdentifyConfig, Event as IdentifyEvent,
 };
+use tokio::select;
+
+mod node_ops;
+use node_ops::run;
+
 
 // Defines the Network and Discovery Behavior of a Node
 // IdentifyBehavior allows for identifying new Peers
@@ -32,6 +35,7 @@ struct NodeBehavior {
     kad: KademliaBehavior<KademliaInMemory>,
     gossip: gossipsub::Behaviour,
 }
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     let _ = tracing_subscriber::fmt()
@@ -90,7 +94,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let topic = gossipsub::IdentTopic::new("hive");
     // subscribes to our topic
     swarm.behaviour_mut().gossip.subscribe(&topic)?;
-    
+
     // Tell the swarm to listen on all interfaces and a random, OS-assigned
     // port. QUIC uses UDP.
 
@@ -98,7 +102,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     if let Some(addr) = args().nth(1) {
         swarm.listen_on("/ip4/0.0.0.0/tcp/9000".parse()?)?;
         swarm.listen_on("/ip4/0.0.0.0/udp/9001/quic-v1".parse()?)?;
-        
+
         let remote: Multiaddr = addr.parse()?;
         swarm.dial(remote)?;
         info!("Dialed address: {addr}");
@@ -106,14 +110,39 @@ async fn main() -> Result<(), Box<dyn Error>> {
         info!("Act as bootstrap node");
         swarm.listen_on("/ip4/0.0.0.0/tcp/9000".parse()?)?;
         swarm.listen_on("/ip4/0.0.0.0/udp/9001/quic-v1".parse()?)?;
-    } 
+    }
 
     loop {
-    
-        match swarm.select_next_some().await {
-            SwarmEvent::NewListenAddr { address, .. } => println!("Listening on {address:?}"),
-            SwarmEvent::Behaviour(event) => println!("{event:?}"),
-            _ => {}
-        }
+        // select! {
+
+            
+        //     Ok(Some(node_stats)) = run() => {
+        //         if let Err(e) = swarm
+        //             .behaviour_mut().gossip
+        //             .publish(topic.clone(), node_stats.as_bytes()) {
+        //             println!("Publish error: {e:?}");
+        //         }
+        //     }
+
+        //     Err(e) = run() => {
+        //         // Log the error for observability.
+        //         println!("Problem generating node stats: {e:?}");
+        //     }
+            
+        //     event = swarm.select_next_some() => match event {
+        //         SwarmEvent::Behaviour(NodeBehavior::Gossipsub(gossipsub::Event::Message {
+        //             propagation_source: peer_id,
+        //             message_id: id,
+        //             message,
+        //         })) => println!(
+        //                 "Got message: '{}' with id: {id} from peer: {peer_id}",
+        //                 String::from_utf8_lossy(&message.data),
+        //             ),
+        //         SwarmEvent::NewListenAddr { address, .. } => {
+        //             println!("Local node is listening on {address}");
+        //         }
+        //         _ => {}
+        //     }
+        // }
     }
 }
